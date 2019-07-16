@@ -12,7 +12,6 @@ Plugin 'Yggdroot/indentLine'
 
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'ervandew/supertab'
 
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
@@ -30,9 +29,16 @@ Plugin 'elzr/vim-json'
 
 Plugin 'YanhaoYang/neodark.vim'
 
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/deoplete.nvim'
+if !has('nvim')
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
+
+Plugin 'Shougo/neocomplete.vim'
 
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
