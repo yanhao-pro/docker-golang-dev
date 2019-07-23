@@ -11,4 +11,5 @@ bindkey -v
 export LANG=en_US.UTF-8
 export EDITOR='vim'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh

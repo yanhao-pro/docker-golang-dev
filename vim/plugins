@@ -29,16 +29,8 @@ Plugin 'elzr/vim-json'
 
 Plugin 'YanhaoYang/neodark.vim'
 
-Plugin 'Shougo/deoplete.nvim'
-if !has('nvim')
-  Plugin 'roxma/nvim-yarp'
-  Plugin 'roxma/vim-hug-neovim-rpc'
-endif
-
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
-
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'honza/vim-snippets'
 
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
