@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 select_branch () {
   cmdout=$(git branch | sed 's/*//g')
@@ -30,7 +30,7 @@ do
   echo "d. diff"
   echo "a. add -Av"
   echo "f. fetch -v"
-  echo "p. gpc"
+  echo "p. ggp"
   echo "u. pull -v"
   echo "b. branch"
   echo "o. checkout"
@@ -58,7 +58,7 @@ do
   echo ">> git fetch -v"
     git fetch -v
   elif [ "$COMMAND" = "p" ] ; then
-  echo ">> gpc"
+  echo ">> ggp"
     gpc
   elif [ "$COMMAND" = "u" ] ; then
   echo ">> git pull -v"

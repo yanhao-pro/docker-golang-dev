@@ -30,7 +30,7 @@ Plugin 'elzr/vim-json'
 Plugin 'YanhaoYang/neodark.vim'
 
 Plugin 'neoclide/coc.nvim', {'branch': 'release'}
-Plugin 'honza/vim-snippets'
+Plugin 'yanhao-a2b/vim-snippets'
 
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
