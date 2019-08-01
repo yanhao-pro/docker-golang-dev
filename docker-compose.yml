@@ -9,11 +9,16 @@ services:
     image: yanhao/docker-golang-dev
     hostname: golang.dev
     volumes:
-      - ./src:/go/src
-      - $SSH_AUTH_SOCK:/ssh-agent
-      - "${HOME}/.vbuf:/home/docker/.vbuf"
+      - ssh_agent:/.ssh-agent
+      - "${HOME}/.share:/home/docker/.share"
+      - ./src:/src
     environment:
-      - SSH_AUTH_SOCK=/ssh-agent
+      - SSH_AUTH_SOCK=/.ssh-agent/proxy-socket
+      - HISTFILE=/home/docker/.share/.zsh_history
+      - GIT_AUTHOR_NAME=Yanhao Yang
+      - GIT_AUTHOR_EMAIL=yanhao.yang@example.com
+      - GIT_COMMITTER_NAME=Yanhao Yang
+      - GIT_COMMITTER_EMAIL=yanhao.yang@example.com
 
   ssh-agent:
     image: yanhao/ssh-agent

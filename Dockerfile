@@ -49,9 +49,9 @@ ENV TERM=xterm-256color
 # To make oh-my-zsh installer happy
 ENV SHELL=/usr/bin/zsh
 
-COPY files/spark /usr/local/bin/spark
-COPY files/nb /usr/local/bin/nb
-COPY files/gs /usr/local/bin/gs
+COPY bin/spark /usr/local/bin/spark
+COPY bin/nb /usr/local/bin/nb
+COPY bin/gs /usr/local/bin/gs
 
 USER docker
 
@@ -71,8 +71,10 @@ RUN \
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
   ~/.fzf/install --all
 
-COPY --chown=docker:docker files/.zshrc /home/docker/.zshrc
-COPY --chown=docker:docker vim /home/docker/.vim
+COPY --chown=docker:docker files/zshrc /home/docker/.zshrc
+COPY --chown=docker:docker files/gitignore_global /home/docker/.gitignore_global
+COPY --chown=docker:docker files/gitconfig /home/docker/.gitconfig
+COPY --chown=docker:docker files/vim /home/docker/.vim
 
 RUN cd ~/.vim && ./setup.sh
 

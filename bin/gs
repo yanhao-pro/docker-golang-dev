@@ -59,7 +59,7 @@ do
     git fetch -v
   elif [ "$COMMAND" = "p" ] ; then
   echo ">> ggp"
-    gpc
+    ggp
   elif [ "$COMMAND" = "u" ] ; then
   echo ">> git pull -v"
     git pull -v
