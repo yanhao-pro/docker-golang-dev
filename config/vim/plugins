@@ -13,7 +13,6 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'tpope/vim-surround'
 Plugin 'Lokaltog/vim-easymotion'
 
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
 Plugin 'airblade/vim-gitgutter'
@@ -29,7 +28,7 @@ Plugin 'elzr/vim-json'
 
 Plugin 'YanhaoYang/neodark.vim'
 
-Plugin 'neoclide/coc.nvim', {'branch': 'release'}
+Plugin 'neoclide/coc.nvim'
 Plugin 'yanhao-a2b/vim-snippets'
 
 Plugin 'fatih/vim-go'

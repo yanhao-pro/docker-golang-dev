@@ -71,10 +71,10 @@ RUN \
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
   ~/.fzf/install --all
 
-COPY --chown=docker:docker files/zshrc /home/docker/.zshrc
-COPY --chown=docker:docker files/gitignore_global /home/docker/.gitignore_global
-COPY --chown=docker:docker files/gitconfig /home/docker/.gitconfig
-COPY --chown=docker:docker files/vim /home/docker/.vim
+COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
+COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
+COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
+COPY --chown=docker:docker config/vim /home/docker/.vim
 
 RUN cd ~/.vim && ./setup.sh
 
