@@ -1,14 +1,34 @@
 #!/bin/zsh
 
+function git_current_branch() {
+  local ref
+  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return  # no git repo.
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  echo ${ref#refs/heads/}
+}
+
+function ggp() {
+  if [[ "$#" != 0 ]] && [[ "$#" != 1 ]]; then
+    git push origin "${*}"
+  else
+    [[ "$#" == 0 ]] && local b="$(git_current_branch)"
+    git push origin "${b:=$1}"
+  fi
+}
+
 select_branch () {
   cmdout=$(git branch | sed 's/*//g')
-  branches=($cmdout)
+  branches=("${(f)cmdout}")
   element_count=${#branches[@]}
-  index=0
+  index=1
   echo "All branches:"
-  while [ "$index" -lt "$element_count" ]
+  while [ ! "$index" -gt "$element_count" ]
   do    # List all the elements in the array.
-    echo "$index: ${branches[$index]}"
+    echo "$index: ${branches[$index]// /}"
     let "index = $index + 1"
   done
   echo ""
@@ -16,7 +36,7 @@ select_branch () {
   read IDX
   branch=""
   if [ -n "$IDX" ]; then
-    branch="${branches[$IDX]}"
+    branch="${branches[$IDX]// /}"
   fi
 }
 
@@ -43,7 +63,7 @@ do
   echo "-. branch -D"
   echo "q. exit"
   echo '~~~~~~~~~~~~~~~~~~~~'
-  read -r -s -n 1 COMMAND
+  read -r -s -k 1 COMMAND
   echo ''
   if [ "$COMMAND" = "s" ] ; then
   echo ">> git status"
