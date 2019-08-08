@@ -50,8 +50,6 @@ ENV TERM=xterm-256color
 ENV SHELL=/usr/bin/zsh
 
 COPY bin/spark /usr/local/bin/spark
-COPY bin/nb /usr/local/bin/nb
-COPY bin/gs /usr/local/bin/gs
 
 USER docker
 
@@ -71,6 +69,8 @@ RUN \
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
   ~/.fzf/install --all
 
+COPY --chown=docker:docker bin/nb /usr/local/bin/nb
+COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig

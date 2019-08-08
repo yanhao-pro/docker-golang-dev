@@ -1,14 +1,20 @@
+"" vim:fdm=marker:fdl=0
+
 runtime plugins
 
 filetype on
 filetype plugin indent on   " Automatically detect file types.
 syntax on                   " syntax highlighting
 
+" Misc plugin settings {{{
+let g:NERDDefaultAlign = 'left'
+
 let g:vim_json_syntax_conceal = 0
 
 let g:neodark#use_256color = 1
 let g:neodark#terminal_transparent = 1
 colorscheme neodark
+" }}}
 
 set encoding=utf-8
 
