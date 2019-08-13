@@ -70,7 +70,9 @@ RUN \
   ~/.fzf/install --all
 
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
-COPY --chown=docker:docker bin/gs /usr/local/bin/gs
+COPY --chown=docker:docker bin/nb /usr/local/bin/nb
+COPY --chown=docker:docker bin/gocilint.sh /usr/local/bin/gocilint.sh
+COPY --chown=docker:docker bin/install-protoc.sh /usr/local/bin/install-protoc.sh
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
