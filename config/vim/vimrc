@@ -214,9 +214,7 @@ vmap <Leader>t= :Tabularize /=<CR>
 nmap <Leader>t: :Tabularize /:\zs<CR>
 vmap <Leader>t: :Tabularize /:\zs<CR>
 
-"------------------------------------------------------------------------------
-" neoclide/coc.nvim
-"------------------------------------------------------------------------------
+" neoclide/coc.nvim {{{
 
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
@@ -248,9 +246,9 @@ imap <C-j> <Plug>(coc-snippets-expand-jump)
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
-"------------------------------------------------------------------------------
-" Vim-go
-"------------------------------------------------------------------------------
+" }}}
+
+" Vim-go {{{
 let g:go_fmt_fail_silently = 1
 let g:go_fmt_command = "gofmt" "Explicited the formater plugin (gofmt, goimports, goreturn...)
 
@@ -320,6 +318,13 @@ let g:go_fmt_options = { 'gofmt': '-s' }
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+function! HackVimGo()
+  autocmd! vim-go-buffer FileChangedShell <buffer>
+endfunction
+autocmd FileType go call HackVimGo()
+
+" }}}
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"

@@ -69,7 +69,7 @@ RUN \
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
   ~/.fzf/install --all
 
-COPY --chown=docker:docker bin/nb /usr/local/bin/nb
+COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker bin/gocilint.sh /usr/local/bin/gocilint.sh
 COPY --chown=docker:docker bin/install-protoc.sh /usr/local/bin/install-protoc.sh
