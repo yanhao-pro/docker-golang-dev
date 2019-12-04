@@ -313,6 +313,7 @@ nmap <leader>j :lnext<CR>
 nmap <leader>k :lprevious<CR>
 
 autocmd FileType go nmap <leader>i  <Plug>(go-install)
+autocmd FileType go set tabstop=4
 let g:go_fmt_options = { 'gofmt': '-s' }
 
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
