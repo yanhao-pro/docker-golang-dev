@@ -6,6 +6,7 @@ if [[ -f $HOME/.nvm/nvm.sh ]]; then
 fi
 
 if [[ ! -d bundle/coc.nvim ]]; then
+  mkdir -p $HOME/.config/coc
   git clone https://github.com/neoclide/coc.nvim.git bundle/coc.nvim
   cd bundle/coc.nvim && yarn install && cd ~/.vim
 fi
