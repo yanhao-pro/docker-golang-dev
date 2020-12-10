@@ -1,4 +1,4 @@
-FROM golang:1.14.4
+FROM golang:1.15.6
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
@@ -74,8 +74,8 @@ COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_globa
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/vim /home/docker/.vim
 
-ADD vsc-go.tgz /home/docker/
-ADD vsc-server.tgz /home/docker/
+# ADD vsc-go.tgz /home/docker/
+# ADD vsc-server.tgz /home/docker/
 
 RUN cd ~/.vim && ./setup.sh
 
