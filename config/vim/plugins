@@ -29,7 +29,7 @@ Plugin 'elzr/vim-json'
 Plugin 'YanhaoYang/neodark.vim'
 
 Plugin 'neoclide/coc.nvim'
-Plugin 'yanhao-a2b/vim-snippets'
+Plugin 'yanhao-pro/vim-snippets'
 
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
