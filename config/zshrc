@@ -1,6 +1,6 @@
 export ZSH=/home/docker/.oh-my-zsh
 
-ZSH_THEME="fishy"
+ZSH_THEME="ys"
 
 plugins=(git golang zsh-syntax-highlighting zsh-autosuggestions)
 
