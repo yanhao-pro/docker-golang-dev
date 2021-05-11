@@ -59,7 +59,7 @@ set foldmethod=indent
 set foldcolumn=2
 set foldlevel=1
 set list
-set listchars=tab:\ \ ,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
+set listchars=tab:,.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
 set wildmenu                    " show list instead of just completing
 set wildmode=list:longest,full  " command <Tab> completion, list matches, then longest common part, then all.
@@ -167,7 +167,7 @@ function! InitializeDirectories()
 endfunction
 call InitializeDirectories()
 
-au BufNewFile,BufRead *.{md,mkdn,markdown} set filetype=markdown
+autocmd BufNewFile,BufRead *.{md,mkdn,markdown} set filetype=markdown
 
 nmap <Leader>pm :PreviewMarkdown<CR>
 nmap <Leader>pt :PreviewTextile<CR>
@@ -256,22 +256,22 @@ let g:go_fmt_command = "goimports"
 let g:go_auto_sameids = 1
 
 " Show a list of interfaces which is implemented by the type under your cursor
-au FileType go nmap <Leader>s <Plug>(go-implements)
+autocmd FileType go nmap <Leader>s <Plug>(go-implements)
 
 " Show type info for the word under your cursor
-au FileType go nmap <Leader>i <Plug>(go-info)
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
 
 " Open the relevant Godoc for the word under the cursor
-au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+autocmd FileType go nmap <Leader>gd <Plug>(go-doc)
+autocmd FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 " Open the Godoc in browser
-au FileType go nmap <Leader>gb <Plug>(go-doc-browser)
+autocmd FileType go nmap <Leader>gb <Plug>(go-doc-browser)
 
 " Run/build/test/coverage
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+autocmd FileType go nmap <leader>c <Plug>(go-coverage)
 
 " By default syntax-highlighting for Functions, Methods and Structs is disabled.
 " Let's enable them!
@@ -324,11 +324,12 @@ autocmd FileType go nmap <leader>i  <Plug>(go-install)
 autocmd FileType go set tabstop=4
 autocmd FileType go set softtabstop=4
 autocmd FileType go set shiftwidth=4
+autocmd FileType go set listchars=tab:\ \ ,trail:.,extends:#,nbsp:.
 let g:go_fmt_options = { 'gofmt': '-s' }
 
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+autocmd FileType go nmap <Leader>ds <Plug>(go-def-split)
+autocmd FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+autocmd FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
 function! HackVimGo()
   autocmd! vim-go-buffer FileChangedShell <buffer>

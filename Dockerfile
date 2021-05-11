@@ -8,13 +8,18 @@ RUN \
   # for build vim
   python-dev libncurses5-dev libncursesw5-dev \
   python3-dev ruby-dev lua5.1 liblua5.1-dev \
-  zsh silversearcher-ag curl locales sudo less tmux \
+  zsh silversearcher-ag curl locales sudo less tmux rsync jq \
   openssh-server \
   && \
   apt-get autoremove -y && \
   apt-get autoclean && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69 && \
+  echo "deb https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list && \
+  apt-get update && \
+  apt-get install k6
 
 RUN \
   echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
@@ -49,7 +54,16 @@ ENV TERM=xterm-256color
 
 USER docker
 
-# nvm && yarn
+# Setup zsh
+RUN export SHELL=/usr/bin/zsh && \
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && \
+   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
+   git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
+  ~/.fzf/install --all
+COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
+
+# Setup VIM
 ENV NODE_VERSION v10.16.0
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash && \
   bash -c "\
@@ -58,26 +72,20 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.s
     npm install -g yarn && \
     echo 'Done!'"
 
-RUN export SHELL=/usr/bin/zsh && \
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)" && \
-   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting && \
-   git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
-  ~/.fzf/install --all
+COPY --chown=docker:docker config/vim /home/docker/.vim
+RUN cd ~/.vim && ./setup.sh
+
+COPY --chown=docker:docker bin/sync-in.sh /usr/local/bin/sync-in
+COPY --chown=docker:docker bin/sync-out.sh /usr/local/bin/sync-out
 
 COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
-COPY --chown=docker:docker bin/gocilint.sh /usr/local/bin/gocilint.sh
-COPY --chown=docker:docker bin/install-protoc.sh /usr/local/bin/install-protoc.sh
-COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
-COPY --chown=docker:docker config/vim /home/docker/.vim
 
+# Enable VSCode remote
 # ADD vsc-go.tgz /home/docker/
 # ADD vsc-server.tgz /home/docker/
-
-RUN cd ~/.vim && ./setup.sh
 
 # tmux new-session -c $PWD
 RUN cd && \
