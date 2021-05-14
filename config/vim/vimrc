@@ -253,7 +253,7 @@ let g:go_metalinter_autosave = 1
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck', 'goimports']
 let g:go_jump_to_error = 0
 let g:go_fmt_command = "goimports"
-let g:go_auto_sameids = 1
+" let g:go_auto_sameids = 1
 
 " Show a list of interfaces which is implemented by the type under your cursor
 autocmd FileType go nmap <Leader>s <Plug>(go-implements)
