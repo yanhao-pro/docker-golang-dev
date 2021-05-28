@@ -15,5 +15,21 @@ export SHELL="/bin/zsh"
 alias gomt="go mod tidy"
 alias gomv="go mod vendor"
 
+gnb () {
+	name="$@"
+	name=${name:gs/ /_}
+	name=${name:gs/:/}
+	echo "Create branch $name [y/N]?"
+	read -r -s -k 1 COMMAND
+	if [ "$COMMAND" = "y" ]
+	then
+		git checkout master
+		git pull -v
+		git checkout -b $name
+	else
+		echo "abort."
+	fi
+}
+
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 [[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
