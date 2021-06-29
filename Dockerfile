@@ -1,4 +1,4 @@
-FROM golang:1.15
+FROM golang:1.16.5
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
@@ -64,8 +64,8 @@ RUN export SHELL=/usr/bin/zsh && \
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 
 # Setup VIM
-ENV NODE_VERSION v10.16.0
-RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash && \
+ENV NODE_VERSION v14.17.1
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && \
   bash -c "\
     source $HOME/.nvm/nvm.sh && \
     nvm install $NODE_VERSION && \
