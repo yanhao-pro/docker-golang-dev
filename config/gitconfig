@@ -1,4 +1,4 @@
 [core]
   excludesfile = ~/.gitignore_global
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+[url "git@github.com:deliver"]
+  insteadOf = https://github.com/deliver

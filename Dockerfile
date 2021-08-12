@@ -75,6 +75,19 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | b
 COPY --chown=docker:docker config/vim /home/docker/.vim
 RUN cd ~/.vim && ./setup.sh
 
+# Enable VSCode remote
+# ADD vsc-go.tgz /home/docker/
+# ADD vsc-server.tgz /home/docker/
+
+RUN mkdir -p ~/.ssh && \
+  ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+# tmux new-session -c $PWD
+RUN cd && \
+  git clone https://github.com/gpakosz/.tmux.git && \
+  ln -s -f .tmux/.tmux.conf && \
+  cp .tmux/.tmux.conf.local .
+
 COPY --chown=docker:docker bin/sync-in.sh /usr/local/bin/sync-in
 COPY --chown=docker:docker bin/sync-out.sh /usr/local/bin/sync-out
 
@@ -82,16 +95,6 @@ COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
-
-# Enable VSCode remote
-# ADD vsc-go.tgz /home/docker/
-# ADD vsc-server.tgz /home/docker/
-
-# tmux new-session -c $PWD
-RUN cd && \
-  git clone https://github.com/gpakosz/.tmux.git && \
-  ln -s -f .tmux/.tmux.conf && \
-  cp .tmux/.tmux.conf.local .
 
 WORKDIR /go/src
 
