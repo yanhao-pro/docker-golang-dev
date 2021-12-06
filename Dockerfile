@@ -96,6 +96,12 @@ COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 
+RUN cd /tmp && \
+  git clone https://github.com/jesseduffield/lazygit.git && \
+  cd lazygit && \
+  go install && \
+  rm -fr /tmp/*
+
 WORKDIR /go/src
 
 EXPOSE 2222
