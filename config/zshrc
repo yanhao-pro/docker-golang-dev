@@ -16,19 +16,30 @@ alias gomt="go mod tidy"
 alias gomv="go mod vendor"
 
 gnb () {
-	name="$@"
-	name=${name:gs/ /_}
-	name=${name:gs/:/}
-	echo "Create branch $name [y/N]?"
-	read -r -s -k 1 COMMAND
-	if [ "$COMMAND" = "y" ]
-	then
-		git checkout master
-		git pull -v
-		git checkout -b $name
-	else
-		echo "abort."
-	fi
+  name="$@"
+  name=${name:gs/ /_}
+  name=${name:gs/:/}
+  echo "Create branch $name [y/N]?"
+  read -r -s -k 1 COMMAND
+  if [ "$COMMAND" = "y" ]
+  then
+    git checkout master
+    git pull -v
+    git checkout -b $name
+  else
+    echo "abort."
+  fi
+}
+
+ERROR_COLOR='\033[0;91m'
+INFO_COLOR='\033[0;96m'
+NO_COLOR='\033[0m' # No Color
+
+tart () {
+  ts=$(date "+%Y%m%d-%H%M%S")
+  echo -e "${ERROR_COLOR}tar czvf ${1}-${ts}.tgz ${1}${NO_COLOR}"
+  tar czvf "${1}-${ts}.tgz" "${1}"
+  echo -e "${INFO_COLOR}Done!${NO_COLOR}"
 }
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
