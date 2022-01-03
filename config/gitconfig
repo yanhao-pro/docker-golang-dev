@@ -4,3 +4,8 @@
   insteadOf = https://github.com/deliver
 [pull]
   ff = only
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
+  prompt = false

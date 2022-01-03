@@ -367,3 +367,10 @@ nnoremap frn :GoRename<CR>
 nnoremap fs :GoFillStruct<CR>
 nnoremap ft :GoAddTags<CR>
 nnoremap fv :GoVet<CR>
+
+" get from REMOTE, file you are merging into your branch
+nnoremap dr :diffg RE
+" get from BASE, common ancestor
+nnoremap db :diffg BA
+" get from LOCAL, file from the current branch
+nnoremap dl :diffg LO
