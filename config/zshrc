@@ -14,6 +14,8 @@ export SHELL="/bin/zsh"
 
 alias gomt="go mod tidy"
 alias gomv="go mod vendor"
+alias tn="tmux new-session -c '$PWD'"
+alias ta="tmux at"
 
 gnb () {
   name="$@"
