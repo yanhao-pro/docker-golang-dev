@@ -187,7 +187,7 @@ nnoremap gR :grep '\b<cword>\b'<CR>
 nnoremap GR :grep '\b<cword>\b' %:p:h/*<CR>
 nnoremap gs :%s/\<<C-r><C-w>\>/
 
-nnoremap gb :Gblame<CR>
+nnoremap gb :Git blame<CR>
 nnoremap gl :%!xmllint --format -<CR>
 nnoremap gp :PreviewMarkdown<CR>
 
