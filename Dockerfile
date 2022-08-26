@@ -1,4 +1,4 @@
-FROM golang:1.17.8-bullseye
+FROM golang:1.18.2-bullseye
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
