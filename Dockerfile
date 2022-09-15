@@ -1,4 +1,4 @@
-FROM golang:1.18.2-bullseye
+FROM golang:1.18.5-bullseye
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
@@ -15,11 +15,6 @@ RUN \
   apt-get autoclean && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69 && \
-  echo "deb https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list && \
-  apt-get update && \
-  apt-get install k6
 
 RUN \
   echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
@@ -49,6 +44,10 @@ RUN \
   make install && \
   cd ~ && \
   rm -rf /tmp/*
+
+RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/install.sh
+
+RUN mkdir /app && chown -R docker /app
 
 ENV TERM=xterm-256color
 
@@ -95,12 +94,15 @@ COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
+COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
 
 RUN cd /tmp && \
   git clone https://github.com/jesseduffield/lazygit.git && \
   cd lazygit && \
   go install && \
   rm -fr /tmp/*
+
+RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 
 WORKDIR /go/src
 

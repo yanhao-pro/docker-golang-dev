@@ -1,6 +1,6 @@
 export ZSH=/home/docker/.oh-my-zsh
 
-ZSH_THEME="ys"
+ZSH_THEME="evan"
 
 plugins=(git golang zsh-syntax-highlighting zsh-autosuggestions)
 
@@ -46,4 +46,8 @@ tart () {
 }
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
-[[ -f ~/.nvm/nvm.sh ]] && source ~/.nvm/nvm.sh
+
+export NODE_VERSION=v14.17.1
+export PATH=$HOME/.nvm/versions/node/$NODE_VERSION/bin:$PATH
+
+eval "$(starship init zsh)"
