@@ -45,7 +45,7 @@ RUN \
   cd ~ && \
   rm -rf /tmp/*
 
-RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/install.sh
+RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/*
 
 RUN mkdir /app && chown -R docker /app
 
