@@ -34,6 +34,28 @@ gnb () {
   fi
 }
 
+guo () {
+  local b="$(git_current_branch)"
+  echo "git pull origin ${b:=$1} --rebase"
+  git pull origin "${b:=$1} --rebase"
+}
+
+ggpi () {
+  local b="$(git_current_branch)"
+  if [ "$b" == "master" ]
+  then
+    echo "Push to $b branch [y/N]?"
+    read -r -s -k 1 COMMAND
+    if [ "$COMMAND" != "y" ]
+    then
+      echo "abort."
+      exit(2)
+    fi
+  fi
+
+  echo "git push origin \"${b:=$1}\""
+}
+
 ERROR_COLOR='\033[0;91m'
 INFO_COLOR='\033[0;96m'
 NO_COLOR='\033[0m' # No Color
