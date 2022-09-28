@@ -42,14 +42,14 @@ guo () {
 
 ggpi () {
   local b="$(git_current_branch)"
-  if [ "$b" == "master" ]
+  if [ "$b" = "master" ]
   then
     echo "Push to $b branch [y/N]?"
     read -r -s -k 1 COMMAND
     if [ "$COMMAND" != "y" ]
     then
       echo "abort."
-      exit(2)
+      exit
     fi
   fi
 
@@ -58,14 +58,14 @@ ggpi () {
 
 ggfi () {
   local b="$(git_current_branch)"
-  if [ "$b" == "master" ]
+  if [ "$b" = "master" ]
   then
     echo "Push to $b branch with force [y/N]?"
     read -r -s -k 1 COMMAND
     if [ "$COMMAND" != "y" ]
     then
       echo "abort."
-      exit(2)
+      exit
     fi
   fi
 
