@@ -37,7 +37,7 @@ gnb () {
 guo () {
   local b="$(git_current_branch)"
   echo "git pull origin ${b:=$1} --rebase"
-  git pull origin "${b:=$1} --rebase"
+  git pull origin "${b:=$1}" --rebase
 }
 
 ggpi () {
@@ -54,6 +54,22 @@ ggpi () {
   fi
 
   echo "git push origin \"${b:=$1}\""
+}
+
+ggfi () {
+  local b="$(git_current_branch)"
+  if [ "$b" == "master" ]
+  then
+    echo "Push to $b branch with force [y/N]?"
+    read -r -s -k 1 COMMAND
+    if [ "$COMMAND" != "y" ]
+    then
+      echo "abort."
+      exit(2)
+    fi
+  fi
+
+  echo "git push --force origin \"${b:=$1}\""
 }
 
 ERROR_COLOR='\033[0;91m'

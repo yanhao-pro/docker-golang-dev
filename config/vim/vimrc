@@ -370,6 +370,10 @@ nnoremap fs :GoFillStruct<CR>
 nnoremap ft :GoAddTags<CR>
 nnoremap fv :GoVet<CR>
 
+" https://github.com/lambdalisue/fern.vim
+nnoremap fo :Fern .<CR>
+nnoremap ff :Fern . -reveal=%<CR>
+
 map <leader>lo :lopen<CR>
 map <leader>lf :lfirst<CR>
 map <leader>lc :lclose<CR>

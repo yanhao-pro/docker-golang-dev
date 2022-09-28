@@ -36,4 +36,6 @@ Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'majutsushi/tagbar'
 
+Plugin 'lambdalisue/fern.vim'
+
 call vundle#end()
