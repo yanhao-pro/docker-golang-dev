@@ -113,8 +113,7 @@ vmap <leader>w <ESC><ESC>:w<CR>
 command W w !sudo tee % > /dev/null
 
 " NerdTree {
-map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-map <leader>e :NERDTree<CR>
+map <leader>e :NERDTreeToggle<CR>
 nmap <leader>nt :NERDTreeFind<CR>
 nnoremap <silent> <C-f> :NERDTreeFind<CR>
 
