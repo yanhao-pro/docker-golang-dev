@@ -11,7 +11,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 
 Plugin 'tpope/vim-surround'
-Plugin 'Lokaltog/vim-easymotion'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
@@ -37,5 +36,6 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'majutsushi/tagbar'
 
 Plugin 'lambdalisue/fern.vim'
+Plugin 'monkoose/vim9-stargate'
 
 call vundle#end()
