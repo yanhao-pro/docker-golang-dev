@@ -29,14 +29,12 @@ RUN \
   cd /tmp && \
   git clone https://github.com/vim/vim.git && \
   cd /tmp/vim && \
+  git checkout v9.0.0500 && \
   ./configure \
     --with-features=huge \
     --enable-multibyte \
     --enable-rubyinterp=yes \
-    --enable-pythoninterp=yes \
-    --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
     --enable-python3interp=yes \
-    --with-python3-config-dir=/usr/lib/python3.4/config-3.4m-x86_64-linux-gnu \
     --enable-luainterp=yes \
     --enable-cscope \
   && \
