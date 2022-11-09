@@ -2,7 +2,7 @@ export ZSH=/home/docker/.oh-my-zsh
 
 ZSH_THEME="evan"
 
-plugins=(git golang zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git golang zsh-syntax-highlighting zsh-autosuggestions dotenv)
 
 source $ZSH/oh-my-zsh.sh
 
