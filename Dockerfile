@@ -1,4 +1,4 @@
-FROM golang:1.18.7-bullseye
+FROM golang:1.20.0-bullseye
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
@@ -16,17 +16,8 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN \
-  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
-  locale-gen && \
-  groupadd --gid 1000 docker && \
-  useradd --gid 1000 --uid 1000 --create-home --shell /bin/bash docker && \
-  echo "docker ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
-  chmod 0440 /etc/sudoers.d/user && \
-  chown -R docker:docker /go && \
-  chown -R docker:docker /etc/ssh && \
-  # build vim
-  cd /tmp && \
+# build vim
+RUN cd /tmp && \
   git clone https://github.com/vim/vim.git && \
   cd /tmp/vim && \
   git checkout v9.0.0500 && \
@@ -45,7 +36,16 @@ RUN \
 
 RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/*
 
-RUN mkdir /app && chown -R docker /app
+RUN \
+  echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+  locale-gen && \
+  groupadd --gid 1000 docker && \
+  useradd --gid 1000 --uid 1000 --create-home --shell /bin/bash docker && \
+  echo "docker ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user && \
+  chmod 0440 /etc/sudoers.d/user && \
+  chown -R docker:docker /go && \
+  chown -R docker:docker /etc/ssh && \
+  mkdir /app && chown -R docker /app
 
 ENV TERM=xterm-256color
 

@@ -1,3 +1,9 @@
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+
+setopt inc_append_history
+setopt hist_ignore_all_dups
+
 export ZSH=/home/docker/.oh-my-zsh
 
 ZSH_THEME="evan"
