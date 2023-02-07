@@ -34,6 +34,16 @@ RUN cd /tmp && \
   cd ~ && \
   rm -rf /tmp/*
 
+RUN cd /opt && \
+  curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz && \
+  tar xzvf nvim-linux64.tar.gz && \
+  ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
+  rm nvim-linux64.tar.gz && \
+  apt-get update && \
+  apt-get install -y python3-pip && \
+  python3 -m pip uninstall neovim pynvim && \
+  python3 -m pip install --user --upgrade pynvim
+
 RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/*
 
 RUN \
@@ -77,7 +87,8 @@ RUN cd ~/.vim && ./setup.sh
 # ADD vsc-server.tgz /home/docker/
 
 RUN mkdir -p ~/.ssh && \
-  ssh-keyscan github.com >> ~/.ssh/known_hosts
+  ssh-keyscan github.com >> ~/.ssh/known_hosts && \
+  mkdir -p /home/docker/.config/nvim
 
 # tmux new-session -c $PWD
 RUN cd && \
@@ -93,6 +104,7 @@ COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
+COPY --chown=docker:docker config/nvim/init.vim /home/docker/.config/nvim/init.vim
 
 RUN cd /tmp && \
   git clone https://github.com/jesseduffield/lazygit.git && \
