@@ -37,5 +37,6 @@ Plugin 'majutsushi/tagbar'
 
 Plugin 'lambdalisue/fern.vim'
 Plugin 'monkoose/vim9-stargate'
+Plugin 'phaazon/hop.nvim'
 
 call vundle#end()
