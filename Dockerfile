@@ -104,7 +104,9 @@ COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
-COPY --chown=docker:docker config/nvim/init.vim /home/docker/.config/nvim/init.vim
+
+COPY --chown=docker:docker config/nvim /home/docker/.config/nvim
+RUN nvim +PlugInstall +qa
 
 RUN cd /tmp && \
   git clone https://github.com/jesseduffield/lazygit.git && \
