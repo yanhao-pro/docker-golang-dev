@@ -7,3 +7,5 @@ Plug 'phaazon/hop.nvim'
 call plug#end()
 
 lua require'hop'.setup()
+
+noremap <leader>w :HopWord<CR>

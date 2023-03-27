@@ -383,10 +383,3 @@ nnoremap dr :diffg RE
 nnoremap db :diffg BA
 " get from LOCAL, file from the current branch
 nnoremap dl :diffg LO
-
-" monkoose/vim9-stargate
-" for the start of a word
-noremap <leader>w <Cmd>call stargate#OKvim('\<')<CR>
-
-highlight StargateMain ctermfg=198 cterm=bold
-highlight StargateSecondary ctermfg=135 cterm=bold
