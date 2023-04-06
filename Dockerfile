@@ -106,15 +106,15 @@ COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
 
 COPY --chown=docker:docker config/nvim /home/docker/.config/nvim
-RUN nvim +PlugInstall +qa
+RUN cd ~/.config/nvim && ./setup.sh
 
-RUN cd /tmp && \
-  git clone https://github.com/jesseduffield/lazygit.git && \
-  cd lazygit && \
-  go install && \
-  rm -fr /tmp/*
+#RUN cd /tmp && \
+#  git clone https://github.com/jesseduffield/lazygit.git && \
+#  cd lazygit && \
+#  go install && \
+#  rm -fr /tmp/*
 
-RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+#RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 
 WORKDIR /go/src
 
