@@ -23,6 +23,8 @@ set hidden                      " allow buffer switching without saving
 
 set showmode                    " display the current mode
 
+set redrawtime=10000            " fix timeout
+
 if has('cmdline_info')
   set ruler                   " show the ruler
   set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
