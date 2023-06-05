@@ -1,4 +1,4 @@
-FROM golang:1.20.0-bullseye
+FROM golang:1.20.4-bullseye
 MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
 
 # Development tools
@@ -71,7 +71,7 @@ RUN export SHELL=/usr/bin/zsh && \
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 
 # Setup VIM
-ENV NODE_VERSION v14.17.1
+ENV NODE_VERSION v18.16.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && \
   bash -c "\
     source $HOME/.nvm/nvm.sh && \

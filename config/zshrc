@@ -91,7 +91,7 @@ tart () {
 
 [[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
 
-export NODE_VERSION=v14.17.1
+# export NODE_VERSION=v14.17.1
 export PATH=$HOME/.nvm/versions/node/$NODE_VERSION/bin:$PATH
 
 eval "$(starship init zsh)"
