@@ -78,6 +78,18 @@ ggfi () {
   echo "git push --force origin \"${b:=$1}\""
 }
 
+goroot () {
+  for i in {1..9}
+  do
+    cd ..
+    if [ -f go.mod ]; then
+      break
+    fi
+  done
+}
+
+alias gt="goroot"
+
 ERROR_COLOR='\033[0;91m'
 INFO_COLOR='\033[0;96m'
 NO_COLOR='\033[0m' # No Color
