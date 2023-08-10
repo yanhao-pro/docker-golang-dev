@@ -90,6 +90,18 @@ goroot () {
 
 alias gt="goroot"
 
+cdf () {
+  echo "cd ${1%/*.go}"
+  cd "${1%/*.go}"
+}
+
+cdx () {
+  dir=$1
+  goroot()
+  echo "cd ${dir%/*.go}"
+  cd "${dir%/*.go}"
+}
+
 ERROR_COLOR='\033[0;91m'
 INFO_COLOR='\033[0;96m'
 NO_COLOR='\033[0m' # No Color
