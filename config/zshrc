@@ -97,7 +97,7 @@ cdf () {
 
 cdx () {
   dir=$1
-  goroot()
+  goroot
   echo "cd ${dir%/*.go}"
   cd "${dir%/*.go}"
 }
