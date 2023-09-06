@@ -78,7 +78,7 @@ ggfi () {
   echo "git push --force origin \"${b:=$1}\""
 }
 
-goroot () {
+cdroot () {
   for i in {1..9}
   do
     cd ..
@@ -88,7 +88,7 @@ goroot () {
   done
 }
 
-alias gt="goroot"
+alias cdr="goroot"
 
 cdf () {
   echo "cd ${1%/*.go}"
@@ -97,7 +97,7 @@ cdf () {
 
 cdx () {
   dir=$1
-  goroot
+  cdroot
   echo "cd ${dir%/*.go}"
   cd "${dir%/*.go}"
 }

@@ -9,7 +9,13 @@ if [[ -f $HOME/.nvm/nvm.sh ]]; then
 fi
 
 nvim --headless -u ./plugins.vim +PlugInstall +qa
-nvim --headless -u ./plugins.vim +GoUpdateBinaries +qa
 
 cd ~/.config/nvim/plugged/coc.nvim && yarn install
-mkdir -p $HOME/.config/coc/extensions && cd $HOME/.config/coc/extensions && yarn add coc-snippets
+
+mkdir -p $HOME/.config/coc/extensions
+cd $HOME/.config/coc/extensions
+yarn add coc-snippets
+
+rm -fr /home/docker/.cache/yarn
+
+nvim --headless -u ./plugins.vim +GoUpdateBinaries +qa

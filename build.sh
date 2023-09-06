@@ -1,1 +1,6 @@
-docker build . --build-arg docker_user_id=$(id -u) --tag yanhao/golang-dev:1.20.0
+#!/bin/bash
+
+set -xe
+
+ver=$1
+docker build . --build-arg "GO_VERSION=$ver" --tag yanhao/golang-dev:$ver

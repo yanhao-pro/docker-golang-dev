@@ -7,5 +7,6 @@
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
     }
-  }
+  },
+  "snippets.ultisnips.pythonPrompt": false
 }

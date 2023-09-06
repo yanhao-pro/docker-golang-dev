@@ -1,11 +1,19 @@
 [core]
   excludesfile = ~/.gitignore_global
+
 [url "git@github.com:deliver"]
   insteadOf = https://github.com/deliver
+
 [pull]
   ff = only
+
 [merge]
-  tool = vimdiff
+  tool = nvim
   conflictstyle = diff3
+
 [mergetool]
   prompt = false
+  keepBackup = false
+
+[mergetool "nvim"]
+ cmd = "nvim -d -c \"wincmd l\" -c \"norm ]c\" \"$LOCAL\" \"$MERGED\" \"$REMOTE\""

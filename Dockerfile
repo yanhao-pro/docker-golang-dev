@@ -1,13 +1,10 @@
-FROM golang:1.20.6-bullseye
-MAINTAINER Yanhao Yang <yanhao.yang@gmail.com>
+ARG  GO_VERSION=1.21.0
+FROM golang:${GO_VERSION}-bullseye
 
 # Development tools
 RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  # for build vim
-  python-dev libncurses5-dev libncursesw5-dev \
-  python3-dev ruby-dev lua5.1 liblua5.1-dev \
   zsh silversearcher-ag curl locales sudo less tmux rsync jq \
   openssh-server \
   && \
@@ -16,24 +13,6 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# build vim
-RUN cd /tmp && \
-  git clone https://github.com/vim/vim.git && \
-  cd /tmp/vim && \
-  git checkout v9.0.0500 && \
-  ./configure \
-    --with-features=huge \
-    --enable-multibyte \
-    --enable-rubyinterp=yes \
-    --enable-python3interp=yes \
-    --enable-luainterp=yes \
-    --enable-cscope \
-  && \
-  make && \
-  make install && \
-  cd ~ && \
-  rm -rf /tmp/*
-
 RUN cd /opt && \
   curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz && \
   tar xzvf nvim-linux64.tar.gz && \
@@ -41,6 +20,7 @@ RUN cd /opt && \
   rm nvim-linux64.tar.gz && \
   apt-get update && \
   apt-get install -y python3-pip && \
+  apt-get clean && \
   python3 -m pip uninstall neovim pynvim && \
   python3 -m pip install --user --upgrade pynvim
 
@@ -70,7 +50,6 @@ RUN export SHELL=/usr/bin/zsh && \
   ~/.fzf/install --all
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 
-# Setup VIM
 ENV NODE_VERSION v18.16.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && \
   bash -c "\
@@ -79,12 +58,19 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | b
     npm install -g yarn && \
     echo 'Done!'"
 
-COPY --chown=docker:docker config/vim /home/docker/.vim
-RUN cd ~/.vim && ./setup.sh
-
 # Enable VSCode remote
 # ADD vsc-go.tgz /home/docker/
 # ADD vsc-server.tgz /home/docker/
+
+RUN cd /tmp && \
+  git clone https://github.com/jesseduffield/lazygit.git && \
+  cd lazygit && \
+  go install && \
+  rm -fr /tmp/* && \
+  rm -fr /home/docker/.cache/go-build
+
+RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
+  rm -fr /home/docker/.cache/go-build
 
 RUN mkdir -p ~/.ssh && \
   ssh-keyscan github.com >> ~/.ssh/known_hosts && \
@@ -107,16 +93,6 @@ COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.to
 
 COPY --chown=docker:docker config/nvim /home/docker/.config/nvim
 RUN cd ~/.config/nvim && ./setup.sh
-
-#RUN cd /tmp && \
-#  git clone https://github.com/jesseduffield/lazygit.git && \
-#  cd lazygit && \
-#  go install && \
-#  rm -fr /tmp/*
-
-#RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
-
-WORKDIR /go/src
 
 EXPOSE 2222
 CMD ["/usr/sbin/sshd", "-D", "-p", "2222"]
