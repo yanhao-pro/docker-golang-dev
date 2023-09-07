@@ -8,7 +8,8 @@ if [[ -f $HOME/.nvm/nvm.sh ]]; then
   nvm use $NODE_VERSION
 fi
 
-nvim --headless -u ./plugins.vim +PlugInstall +qa
+pwd=$(pwd)
+nvim --headless -u $pwd/plugins.vim +PlugInstall +qa
 
 cd ~/.config/nvim/plugged/coc.nvim && yarn install
 
@@ -18,4 +19,4 @@ yarn add coc-snippets
 
 rm -fr /home/docker/.cache/yarn
 
-nvim --headless -u ./plugins.vim +GoUpdateBinaries +qa
+nvim --headless -u $pwd/plugins.vim +GoUpdateBinaries +qa
