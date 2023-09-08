@@ -5,7 +5,8 @@ FROM golang:${GO_VERSION}-bullseye
 RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  zsh silversearcher-ag curl locales sudo less tmux rsync jq \
+  zsh silversearcher-ag locales sudo less tmux rsync jq \
+  ninja-build gettext cmake unzip curl \
   openssh-server \
   && \
   apt-get autoremove -y && \
@@ -13,16 +14,16 @@ RUN \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN cd /opt && \
-  curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz && \
-  tar xzvf nvim-linux64.tar.gz && \
-  ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
-  rm nvim-linux64.tar.gz && \
+RUN cd /tmp && \
+  git clone https://github.com/neovim/neovim && \
+  cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && \
+  make install && \
   apt-get update && \
   apt-get install -y python3-pip && \
   apt-get clean && \
   python3 -m pip uninstall neovim pynvim && \
-  python3 -m pip install --user --upgrade pynvim
+  python3 -m pip install --user --upgrade pynvim && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/*
 
@@ -70,6 +71,7 @@ RUN cd /tmp && \
   rm -fr /home/docker/.cache/go-build
 
 RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
+  CGO_ENABLED=1 go install -tags extended github.com/gohugoio/hugo@latest && \
   rm -fr /home/docker/.cache/go-build
 
 RUN mkdir -p ~/.ssh && \
