@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 bindkey -v
 
 export LANG=en_US.UTF-8
-export EDITOR="vim"
+export EDITOR="nvim"
 export SHELL="/bin/zsh"
 export PATH="$PATH:/app/bin"
 
