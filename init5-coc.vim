@@ -2,13 +2,17 @@ source ~/.config/nvim/plugins.vim
 
 filetype on
 filetype plugin indent on   " Automatically detect file types.
-syntax off                  " syntax highlighting
+syntax off                   " syntax highlighting
+
+" Misc plugin settings {{{
+let g:NERDDefaultAlign = 'left'
 
 let g:vim_json_syntax_conceal = 0
 
 let g:neodark#use_256color = 1
 let g:neodark#terminal_transparent = 1
 colorscheme neodark
+" }}}
 
 set encoding=utf-8
 
@@ -107,6 +111,18 @@ vmap <leader>w <ESC><ESC>:w<CR>
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
+
+" NerdTree {
+map <leader>e :NvimTreeToggle<CR>
+nnoremap <silent> <C-f> :NvimTreeFindFile<CR>
+
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '\.DS_Store']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=0
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+" }
 
 " FZF {
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
@@ -225,6 +241,12 @@ let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
