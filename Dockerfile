@@ -14,15 +14,17 @@ RUN \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN cd /opt && \
-  curl -LO https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz && \
-  tar xzvf nvim-linux64.tar.gz && \
-  ln -sf /opt/nvim-linux64/bin/nvim /usr/local/bin/nvim && \
-  rm nvim-linux64.tar.gz && \
   apt-get update && \
-  apt-get install -y python3-pip && \
+  apt-get install -y python3-pip ninja-build gettext cmake unzip curl && \
   apt-get clean && \
-  python3 -m pip uninstall neovim pynvim && \
-  python3 -m pip install --user --upgrade pynvim
+  git clone https://github.com/neovim/neovim && \
+  cd neovim && \
+  git checkout stable && \
+  make CMAKE_BUILD_TYPE=RelWithDebInfo && \
+  make install && \
+  rm -fr /opt/neovim
+  #python3 -m pip uninstall neovim pynvim && \
+  #python3 -m pip install --user --upgrade pynvim
 
 RUN curl -sS https://starship.rs/install.sh -o /tmp/install.sh && sh /tmp/install.sh --yes && rm -rf /tmp/*
 
