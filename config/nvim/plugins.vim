@@ -4,7 +4,7 @@ filetype off
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdcommenter'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 
 Plug 'tpope/vim-surround'
 

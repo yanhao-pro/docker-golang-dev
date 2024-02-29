@@ -23,6 +23,9 @@ alias gomt="go mod tidy"
 alias gomv="go mod vendor"
 alias tn="tmux new-session -c '$PWD'"
 alias ta="tmux at"
+alias gtc="go test -v -count 1 ."
+alias gtr="go test -v -count 1 . -run"
+alias gtcv="go test . -v -count 1 -cover -coverprofile=/tmp/coverage.out"
 
 gnb () {
   name="$@"
@@ -81,10 +84,10 @@ ggfi () {
 cdroot () {
   for i in {1..9}
   do
-    cd ..
     if [ -f go.mod ]; then
       break
     fi
+    cd ..
   done
 }
 
