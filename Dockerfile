@@ -52,7 +52,7 @@ RUN export SHELL=/usr/bin/zsh && \
   ~/.fzf/install --all
 COPY --chown=docker:docker config/zshrc /home/docker/.zshrc
 
-ENV NODE_VERSION v18.16.0
+ENV NODE_VERSION v20.11.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && \
   bash -c "\
     source $HOME/.nvm/nvm.sh && \
@@ -84,6 +84,10 @@ RUN cd && \
   git clone https://github.com/gpakosz/.tmux.git && \
   ln -s -f .tmux/.tmux.conf && \
   cp .tmux/.tmux.conf.local .
+
+# github copilot
+RUN git clone https://github.com/github/copilot.vim.git \
+  ~/.config/nvim/pack/github/start/copilot.vim
 
 COPY --chown=docker:docker bin/sync-in.sh /usr/local/bin/sync-in
 COPY --chown=docker:docker bin/sync-out.sh /usr/local/bin/sync-out
