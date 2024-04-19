@@ -34,7 +34,6 @@ RUN export SHELL=/usr/bin/zsh && \
    git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
   ~/.fzf/install --all
-COPY --chown=docker:docker zshrc /home/docker/.zshrc
 
 RUN mkdir -p ~/.ssh && \
   ssh-keyscan github.com >> ~/.ssh/known_hosts && \
@@ -54,6 +53,7 @@ RUN sudo apt-get install -y \
   sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
   sudo chmod +x /usr/local/bin/docker-compose
 
+COPY --chown=docker:docker zshrc /home/docker/.zshrc
 COPY --chown=docker:docker starship.toml /home/docker/.config/starship.toml
 
 EXPOSE 2222

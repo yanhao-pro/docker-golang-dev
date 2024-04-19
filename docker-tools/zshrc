@@ -18,9 +18,9 @@ export LANG=en_US.UTF-8
 export SHELL="/bin/zsh"
 
 alias d="docker"
-alias dc="docker-compose"
-alias dcu="docker-compose up -d"
-alias dcs="docker-compose stop"
+alias dc="docker compose"
+alias dcu="docker compose up -d"
+alias dcs="docker compose stop"
 
 ERROR_COLOR='\033[0;91m'
 INFO_COLOR='\033[0;96m'
