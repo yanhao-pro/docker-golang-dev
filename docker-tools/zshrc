@@ -1,0 +1,38 @@
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+
+setopt inc_append_history
+setopt hist_ignore_all_dups
+
+export ZSH=/home/docker/.oh-my-zsh
+
+ZSH_THEME="evan"
+
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions dotenv)
+
+source $ZSH/oh-my-zsh.sh
+
+bindkey -v
+
+export LANG=en_US.UTF-8
+export SHELL="/bin/zsh"
+
+alias d="docker"
+alias dc="docker-compose"
+alias dcu="docker-compose up -d"
+alias dcs="docker-compose stop"
+
+ERROR_COLOR='\033[0;91m'
+INFO_COLOR='\033[0;96m'
+NO_COLOR='\033[0m' # No Color
+
+tart () {
+  ts=$(date "+%Y%m%d-%H%M%S")
+  echo -e "${ERROR_COLOR}tar czvf ${1}-${ts}.tgz ${1}${NO_COLOR}"
+  tar czvf "${1}-${ts}.tgz" "${1}"
+  echo -e "${INFO_COLOR}Done!${NO_COLOR}"
+}
+
+[[ -f ~/.fzf.zsh ]] && source ~/.fzf.zsh
+
+eval "$(starship init zsh)"
