@@ -35,7 +35,7 @@ gnb () {
   read -r -s -k 1 COMMAND
   if [ "$COMMAND" = "y" ]
   then
-    git checkout master
+    git checkout ${MAIN_BRANCH:-master}
     git pull -v
     git checkout -b $name
   else
