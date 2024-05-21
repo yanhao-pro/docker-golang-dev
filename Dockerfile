@@ -19,7 +19,7 @@ RUN cd /opt && \
   apt-get clean && \
   git clone https://github.com/neovim/neovim && \
   cd neovim && \
-  git checkout stable && \
+  git checkout v0.9.5 && \
   make CMAKE_BUILD_TYPE=RelWithDebInfo && \
   make install && \
   rm -fr /opt/neovim
