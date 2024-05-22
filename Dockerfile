@@ -72,7 +72,7 @@ RUN cd /tmp && \
   rm -fr /home/docker/.cache/go-build
 
 RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
-  go install github.com/mikefarah/yq/v3@latest && \
+  go install github.com/mikefarah/yq/v4@latest && \
   rm -fr /home/docker/.cache/go-build
 
 RUN mkdir -p ~/.ssh && \
