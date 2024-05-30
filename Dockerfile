@@ -60,19 +60,8 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | b
     npm install -g yarn && \
     echo 'Done!'"
 
-# Enable VSCode remote
-# ADD vsc-go.tgz /home/docker/
-# ADD vsc-server.tgz /home/docker/
-
-RUN cd /tmp && \
-  git clone https://github.com/jesseduffield/lazygit.git && \
-  cd lazygit && \
-  go install && \
-  rm -fr /tmp/* && \
-  rm -fr /home/docker/.cache/go-build
-
 RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
-  go install github.com/mikefarah/yq/v4@latest && \
+  go install github.com/mikefarah/yq/v4@v4.31.1 && \
   rm -fr /home/docker/.cache/go-build
 
 RUN mkdir -p ~/.ssh && \
