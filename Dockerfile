@@ -83,8 +83,11 @@ COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_globa
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
 
-COPY --chown=docker:docker config/nvim /home/docker/.config/nvim
-RUN cd ~/.config/nvim && ./setup.sh
+RUN git clone https://github.com/LazyVim/starter ~/.config/nvim
+RUN sudo apt-get install ripgrep
+COPY --chown=docker:docker config/lazyvim/plugins/go.lua /home/docker/.config/nvim/lua/plugins/go.lua
+COPY --chown=docker:docker config/lazyvim/config/keymaps.lua /home/docker/.config/nvim/lua/config/keymaps.lua
+RUN nvim --headless +GoInstallBinaries +qa
 
 EXPOSE 2222
 CMD ["/usr/sbin/sshd", "-D", "-p", "2222"]
