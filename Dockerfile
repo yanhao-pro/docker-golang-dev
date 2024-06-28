@@ -61,7 +61,7 @@ RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | b
     echo 'Done!'"
 
 RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest && \
-  go install github.com/mikefarah/yq/v4@v4.31.1 && \
+  go install github.com/mikefarah/yq/v4@latest && \
   rm -fr /home/docker/.cache/go-build
 
 RUN mkdir -p ~/.ssh && \
@@ -73,10 +73,6 @@ RUN cd && \
   git clone https://github.com/gpakosz/.tmux.git && \
   ln -s -f .tmux/.tmux.conf && \
   cp .tmux/.tmux.conf.local .
-
-# github copilot
-RUN git clone https://github.com/github/copilot.vim.git \
-  ~/.config/nvim/pack/github/start/copilot.vim
 
 COPY --chown=docker:docker bin/sync-in.sh /usr/local/bin/sync-in
 COPY --chown=docker:docker bin/sync-out.sh /usr/local/bin/sync-out
