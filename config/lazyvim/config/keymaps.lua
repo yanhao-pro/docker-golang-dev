@@ -1,8 +1,9 @@
 local map = vim.keymap.set
 
-map({ "i", "n", "v" }, "<C-q>", "<cmd>wqa<cr>", { desc = "Escape and Clear hlsearch" })
-map({ "n", "v" }, "<leader>y", "<cmd>w! ~/.share/.vbuf<cr>", { desc = "Escape and Clear hlsearch" })
-map("n", "<leader>p", "<cmd>r ~/.share/.vbuf<cr>", { desc = "Escape and Clear hlsearch" })
+map({ "i", "n", "v" }, "<C-q>", "<cmd>wqa<cr>", { desc = "Save & Exit" })
+map("n", "<leader>y", "<cmd>.w! ~/.share/.vbuf<cr>", { desc = "Copy to share" })
+map("v", "<leader>y", "<cmd>'<,'>w! ~/.share/.vbuf<cr>", { desc = "Copy selected to share" })
+map("n", "<leader>p", "<cmd>r ~/.share/.vbuf<cr>", { desc = "Paste from share" })
 
 map("n", "goa", "<cmd>GoAlternate<cr>", { desc = "GoAlternate" })
 map("n", "goc", "<cmd>GoCallers<cr>", { desc = "GoCallers" })
