@@ -7,6 +7,7 @@ map("n", "<leader>p", "<cmd>r ~/.share/.vbuf<cr>", { desc = "Paste from share" }
 
 map("n", "goa", "<cmd>GoAlternate<cr>", { desc = "GoAlternate" })
 map("n", "goc", "<cmd>GoCallers<cr>", { desc = "GoCallers" })
+map("n", "god", "<cmd>GoDef<cr>", { desc = "GoDef" })
 map("n", "gof", "<cmd>GoFmt<cr>", { desc = "GoFmt" })
 map("n", "goi", "<cmd>GoImports<cr>", { desc = "GoImports" })
 map("n", "gor", "<cmd>GoRename<cr>", { desc = "GoRename" })

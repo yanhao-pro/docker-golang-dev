@@ -1,6 +1,12 @@
 return {
   { "fatih/vim-go" },
   {
+    "yanhao-pro/vim-snippets",
+    config = function()
+      require("luasnip.loaders.from_snipmate").lazy_load()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
