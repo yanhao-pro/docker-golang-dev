@@ -13,3 +13,6 @@ map("n", "goi", "<cmd>GoImports<cr>", { desc = "GoImports" })
 map("n", "gor", "<cmd>GoRename<cr>", { desc = "GoRename" })
 map("n", "gos", "<cmd>GoFillStruct<cr>", { desc = "GoFillStruct" })
 map("n", "got", "<cmd>GoAddTags<cr>", { desc = "GoAddTags" })
+
+map("n", "gb", "<cmd>Git blame<cr>", { desc = "Git blame current file" })
+map("n", "gq", "<cmd>q<cr>", { desc = "Close this" })

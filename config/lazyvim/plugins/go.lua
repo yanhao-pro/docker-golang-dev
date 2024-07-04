@@ -1,4 +1,5 @@
 return {
+  { "tpope/vim-fugitive" },
   { "fatih/vim-go" },
   {
     "yanhao-pro/vim-snippets",
