@@ -1,4 +1,5 @@
 return {
+  { "godlygeek/tabular" },
   { "tpope/vim-fugitive" },
   { "fatih/vim-go" },
   {
