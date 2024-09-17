@@ -87,6 +87,7 @@ RUN git clone https://github.com/LazyVim/starter ~/.config/nvim
 RUN sudo apt-get install ripgrep
 COPY --chown=docker:docker config/lazyvim/plugins/go.lua /home/docker/.config/nvim/lua/plugins/go.lua
 COPY --chown=docker:docker config/lazyvim/config/keymaps.lua /home/docker/.config/nvim/lua/config/keymaps.lua
+COPY --chown=docker:docker config/lazyvim/config/autocmds.lua /home/docker/.config/nvim/lua/config/autocmds.lua
 RUN nvim --headless +GoInstallBinaries +qa
 
 EXPOSE 2222
