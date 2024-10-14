@@ -90,5 +90,14 @@ COPY --chown=docker:docker config/lazyvim/config/keymaps.lua /home/docker/.confi
 COPY --chown=docker:docker config/lazyvim/config/autocmds.lua /home/docker/.config/nvim/lua/config/autocmds.lua
 RUN nvim --headless +GoInstallBinaries +qa
 
+RUN cd /tmp && \
+  mkdir lemonade && \
+  cd lemonade && \
+  curl -OL https://github.com/yanhao-pro/lemonade/releases/download/v1.1.3/lemonade_Linux_arm64.tar.gz && \
+  tar xzvf lemonade_Linux_arm64.tar.gz && \
+  sudo mv lemonade /usr/local/bin && \
+  cd .. && rm -fr lemonade
+COPY --chown=docker:docker config/lemonade.toml /home/docker/.config/lemonade.toml
+
 EXPOSE 2222
 CMD ["/usr/sbin/sshd", "-D", "-p", "2222"]

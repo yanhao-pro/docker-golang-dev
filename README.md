@@ -15,3 +15,7 @@ Following tools are preinstalled:
 ## Usage
 
     docker exec -it yanhao/docker-golang-dev zsh
+
+## On the host
+
+    ❯ lemonade server --log-level=0
