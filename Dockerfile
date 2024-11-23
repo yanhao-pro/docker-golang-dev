@@ -19,7 +19,7 @@ RUN cd /opt && \
   apt-get clean && \
   git clone https://github.com/neovim/neovim && \
   cd neovim && \
-  git checkout v0.9.5 && \
+  git checkout v0.10.2 && \
   make CMAKE_BUILD_TYPE=RelWithDebInfo && \
   make install && \
   rm -fr /opt/neovim
@@ -85,9 +85,12 @@ COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.to
 
 RUN git clone https://github.com/LazyVim/starter ~/.config/nvim
 RUN sudo apt-get install ripgrep
+RUN rm /home/docker/.config/nvim/lua/plugins/example.lua
+
 COPY --chown=docker:docker config/lazyvim/plugins/go.lua /home/docker/.config/nvim/lua/plugins/go.lua
 COPY --chown=docker:docker config/lazyvim/config/keymaps.lua /home/docker/.config/nvim/lua/config/keymaps.lua
 COPY --chown=docker:docker config/lazyvim/config/autocmds.lua /home/docker/.config/nvim/lua/config/autocmds.lua
+COPY --chown=docker:docker config/lazyvim/config/options.lua /home/docker/.config/nvim/lua/config/options.lua
 COPY --chown=docker:docker config/lazyvim/config/after/ftplugin/go.vim /home/docker/.config/nvim/after/ftplugin/go.vim
 RUN nvim --headless +GoInstallBinaries +qa
 

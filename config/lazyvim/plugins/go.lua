@@ -2,12 +2,7 @@ return {
   { "godlygeek/tabular" },
   { "tpope/vim-fugitive" },
   { "fatih/vim-go" },
-  {
-    "yanhao-pro/vim-snippets",
-    config = function()
-      require("luasnip.loaders.from_snipmate").lazy_load()
-    end,
-  },
+  { "rafamadriz/friendly-snippets" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -36,6 +31,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      inlay_hints = { enabled = false },
       servers = {
         gopls = {
           settings = {
