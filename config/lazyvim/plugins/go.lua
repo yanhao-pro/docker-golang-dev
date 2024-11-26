@@ -2,7 +2,7 @@ return {
   { "godlygeek/tabular" },
   { "tpope/vim-fugitive" },
   { "fatih/vim-go" },
-  { "rafamadriz/friendly-snippets" },
+  { "yanhao-pro/friendly-snippets" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
