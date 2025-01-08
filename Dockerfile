@@ -6,7 +6,7 @@ RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
   zsh silversearcher-ag curl locales sudo less tmux rsync jq \
-  openssh-server \
+  openssh-server iputils-ping \
   && \
   apt-get autoremove -y && \
   apt-get autoclean && \
