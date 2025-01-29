@@ -91,18 +91,21 @@ cdroot () {
   done
 }
 
-alias cdr="goroot"
-
-cdf () {
-  echo "cd ${1%/*.go}"
-  cd "${1%/*.go}"
-}
-
 cdx () {
   dir=$1
   cdroot
   echo "cd ${dir%/*.go}"
   cd "${dir%/*.go}"
+}
+
+cdd () {
+  local dir
+  dir=$(find . -maxdepth 1 -type d | fzf) && cd "$dir"
+}
+
+cde () {
+  local dir
+  dir=$(find . -type d | fzf) && cd "$dir"
 }
 
 ERROR_COLOR='\033[0;91m'
