@@ -5,7 +5,7 @@ FROM golang:${GO_VERSION}-bullseye
 RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  zsh silversearcher-ag curl locales sudo less tmux rsync jq \
+  zsh silversearcher-ag curl locales sudo less tmux rsync jq fd-find \
   openssh-server iputils-ping \
   && \
   apt-get autoremove -y && \
