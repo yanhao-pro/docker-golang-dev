@@ -100,7 +100,7 @@ cdx () {
 
 cdd () {
   local dir
-  dir=$(find . -maxdepth 1 -type d | fzf) && cd "$dir"
+  dir=$(find "${1:-.}" -maxdepth 1 -type d | fzf) && cd "$dir"
 }
 
 cde () {
