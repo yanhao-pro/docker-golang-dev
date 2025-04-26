@@ -5,7 +5,7 @@ FROM golang:${GO_VERSION}-bullseye
 RUN \
   apt-get update && \
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  zsh silversearcher-ag curl locales sudo less tmux rsync jq fd-find \
+  zsh silversearcher-ag curl locales sudo less tmux rsync jq fd-find ripgrep \
   openssh-server iputils-ping \
   && \
   apt-get autoremove -y && \
@@ -74,24 +74,13 @@ RUN cd && \
   ln -s -f .tmux/.tmux.conf && \
   cp .tmux/.tmux.conf.local .
 
-COPY --chown=docker:docker bin/sync-in.sh /usr/local/bin/sync-in
-COPY --chown=docker:docker bin/sync-out.sh /usr/local/bin/sync-out
-
 COPY --chown=docker:docker bin/gs /usr/local/bin/gs
 COPY --chown=docker:docker bin/nb /usr/local/bin/nb
 COPY --chown=docker:docker config/gitignore_global /home/docker/.gitignore_global
 COPY --chown=docker:docker config/gitconfig /home/docker/.gitconfig
 COPY --chown=docker:docker config/starship.toml /home/docker/.config/starship.toml
 
-RUN git clone https://github.com/LazyVim/starter ~/.config/nvim
-RUN sudo apt-get install ripgrep
-RUN rm /home/docker/.config/nvim/lua/plugins/example.lua
-
-COPY --chown=docker:docker config/lazyvim/plugins/go.lua /home/docker/.config/nvim/lua/plugins/go.lua
-COPY --chown=docker:docker config/lazyvim/config/keymaps.lua /home/docker/.config/nvim/lua/config/keymaps.lua
-COPY --chown=docker:docker config/lazyvim/config/autocmds.lua /home/docker/.config/nvim/lua/config/autocmds.lua
-COPY --chown=docker:docker config/lazyvim/config/options.lua /home/docker/.config/nvim/lua/config/options.lua
-COPY --chown=docker:docker config/lazyvim/config/after/ftplugin/go.vim /home/docker/.config/nvim/after/ftplugin/go.vim
+COPY --chown=docker:docker config/nvim /home/docker/.config/nvim
 RUN nvim --headless +GoInstallBinaries +qa
 
 RUN cd /tmp && \
